@@ -1,32 +1,37 @@
 package src;
+import java.io.*;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 public class work {
-    public static void main(String[] args) {
-        try {
-            FileReader fr = new FileReader("C:\\Users\\polue\\IdeaProjects\\Projects\\src\\src\\expression.txt");
-            BufferedReader reader = new BufferedReader(fr);
-            String expression = reader.readLine();
-            System.out.println(expression);
-            boolean results = expression.matches(("(\\d+\s+\\d)"));
-            int index = expression.indexOf(" ");
-            String number_one = expression.substring(0, index);
-            String number_two = expression.substring(index + 1);
-            double number_1 = Double.parseDouble(number_two);
-            double number_2 = Double.parseDouble(number_one);
-            if (number_2 != 0) {
-                double result = number_2 / (1.0 / number_1);
-                System.out.println(result);
-            } else {
-                System.out.println("Invalid value");
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+    public static void readingFromAClass() {
+        try(BufferedReader read = new BufferedReader(new FileReader("C:\\Users\\polue\\IdeaProjects\\Projects\\src\\src\\expression.txt"))){
+            String s = read.readLine();
+            boolean result = s.matches("(\\d+\s+\\d)");
+            int index = s.indexOf(" ");
+            String number_one = s.substring(0, index);
+            String number_two = s.substring(index + 1);
+
+            expression multiplication = new expression();
+            System.out.println(multiplication.Mul((number_one), (number_two)));
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    static class expression{
+        String Mul(String number_one, String number_two) {
+            double number_1 = Double.parseDouble(number_two);
+            double number_2 = Double.parseDouble(number_one);
+            if (number_2 != 0) {
+                double result = number_1 / (1.0 / number_2);
+                System.out.println(result);
+                return number_two;
+            } else {
+                System.out.println("Invalid value");
+            }
+            return number_one;
+        }
+    }
+    public static void main(String[] args) {
+        readingFromAClass();
     }
 }
