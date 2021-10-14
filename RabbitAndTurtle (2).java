@@ -1,6 +1,6 @@
 package src;
 
-public class a {
+public class RabbitAndTurtle {
     public static void main(String[] args) throws InterruptedException {
         EggOrChicken age = new EggOrChicken("age", 3);
         age.start();
